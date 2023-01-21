@@ -1,14 +1,14 @@
-
 {
-    "compilerOptions": {
-      "baseUrl": "src",
-      "paths": {
-        "@App": ["app/index"],
-        "@Containers": ["containers/index"],
-        "@Components": ["components/index"]
-
-      }
-    },
-    "include": ["src"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@": ["./src"],
+      "@App": ["./src/app"],
+      "@Assets": ["./src/assets"],
+      "@Containers": ["./src/containers"],
+      "@Components": ["./src/components"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
