@@ -3,9 +3,9 @@ import './App.css';
 
 function App() {
   return (
-  <div class="bg-green-300 border-green-600 border-b p-4 m-4 rounded">
-    Hello World draftbuddy
-  </div>
+    <div className="bg-green-300 border-green-600 border-b p-4 m-4 rounded">
+      Hello World draftbuddy
+    </div>
   );
 }
 
