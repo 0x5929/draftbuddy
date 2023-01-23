@@ -19,7 +19,8 @@ module.exports = {
           ['@App', './src/app'],
           ['@Assets', './src/assets'],
           ['@Containers', './src/containers'],
-          ['@Components', './src/components']
+          ['@Components', './src/components'],
+          ['@Utils', './src/utils']
         ],
         'extensions': ['.ts', '.js', '.jsx', '.json']
       }
@@ -56,6 +57,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control':  0,
     'no-unused-vars': 1,
     'react/jsx-props-no-spreading': 0,
-    'no-console': 'off'
+    'no-console': 'off',
+    'no-restricted-syntax': 0
   }
 }

@@ -6,7 +6,8 @@
       "@App": ["./src/app"],
       "@Assets": ["./src/assets"],
       "@Containers": ["./src/containers"],
-      "@Components": ["./src/components"]
+      "@Components": ["./src/components"],
+      "@Utils": ["./src/utils"]
     }
   },
   "include": ["src"],
