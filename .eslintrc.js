@@ -57,7 +57,9 @@ module.exports = {
     'jsx-a11y/label-has-associated-control':  0,
     'no-unused-vars': 1,
     'react/jsx-props-no-spreading': 0,
-    'no-console': 'off',
-    'no-restricted-syntax': 0
+    'no-console': 0,
+    'no-restricted-syntax': 0,
+    'import/prefer-default-export' : 0,
+    'react/button-has-type': 0
   }
 }
