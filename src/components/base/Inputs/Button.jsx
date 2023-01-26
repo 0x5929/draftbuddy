@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
+import { twMerge } from 'tailwind-merge'
 import { useBtnStyles } from './styles'
 
 function Button ({type, text, onClick, styles}) {
 
   const baseStyles = useBtnStyles()
+
   return (
     <button
       type={type || 'button'}
-      className={`${baseStyles.button} ${styles}`}
+      className={twMerge(baseStyles.button, styles)}
       onClick={onClick}
     >
       { text }

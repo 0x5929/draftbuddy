@@ -1,6 +1,7 @@
 // going to be a nice looking form
 // composed of components that is styled at the component lvl
-import { useForm } from "react-hook-form"
+import { useForm } from 'react-hook-form'
+import useAPIQuery from '@Hooks'
 
 import { Card, TextField, Select, Button } from '@Components'
 import useDraftInputSytles from './styles'
@@ -20,7 +21,7 @@ export default function DraftInput() {
 
   return (
     // form container 
-    <div className={styles.formContainer}>
+    <div className={styles.formContainer} role="form">
       <form className={styles.form} action="#" method="POST">
         <Card>
           <div className={styles.gridContainer}>
@@ -51,8 +52,8 @@ export default function DraftInput() {
         </Card>
         <div className={styles.btnContainer}>
           <Button 
-            text='Cancel'
-            styles={styles.cancelBtn}
+            text='Clear'
+            styles={styles.clearBtn}
             onClick={() => reset({
               leagueFormat: '1/2 PPR',
               headCount: ''

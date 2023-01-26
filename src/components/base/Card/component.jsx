@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types'
+import { twMerge } from 'tailwind-merge'
 import useCardStyles from './styles'
 
-function Card ({children}) {
-  const styles = useCardStyles()
+function Card ({children, styles}) {
+  const baseStyles = useCardStyles()
 
   return (
     /* card container */
-    <div className={styles.cardContainer}>
+    <div className={twMerge(baseStyles.cardContainer, styles)}>
       { children }
     </div>
   )
@@ -15,7 +16,13 @@ function Card ({children}) {
 
 
 Card.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired, 
+  styles: PropTypes.string
 }
+
+Card.defaultProps = {
+  styles: ''
+}
+
 
 export default Card

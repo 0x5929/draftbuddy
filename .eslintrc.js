@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    'jest/globals' : true
   },
   extends: [
     'plugin:react/recommended',
@@ -20,6 +21,7 @@ module.exports = {
           ['@Assets', './src/assets'],
           ['@Containers', './src/containers'],
           ['@Components', './src/components'],
+          ['@Hooks', './src/hooks'],
           ['@Utils', './src/utils']
         ],
         'extensions': ['.ts', '.js', '.jsx', '.json']
@@ -31,7 +33,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', 'testing-library', 'jest', 'jest-dom'],
   rules: {
     'prettier/prettier': [
       // 'prettier/prettier' rule from 'eslint-plugin-prettier'
@@ -60,6 +62,7 @@ module.exports = {
     'no-console': 0,
     'no-restricted-syntax': 0,
     'import/prefer-default-export' : 0,
-    'react/button-has-type': 0
+    'react/button-has-type': 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
   }
 }

@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types'
+import { twMerge } from 'tailwind-merge'
 import { useSlctStyles } from './styles'
 
 // NOTE: errors and validation not included in Select
 // to implement, take a look at TextField base Input Component
-function Select({register, name, id, options}) {
+function Select({register, name, id, options, styles}) {
 
-  const styles = useSlctStyles()
+  const baseStyles = useSlctStyles()
 
   return (
     <div>
-      <label htmlFor={id} className={styles.label}>
+      <label htmlFor={id} className={baseStyles.label}>
        { name }
       </label>
 
@@ -18,11 +19,11 @@ function Select({register, name, id, options}) {
 
         id={id}
         name={id}
-        className={styles.select}
+        className={twMerge(baseStyles.select, styles)}
       >
         {
           options && options.map((option) => (
-            <option key={option}>
+            <option className={baseStyles.options} key={option}>
               { option }
             </option>
           ))
@@ -38,8 +39,12 @@ Select.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
+  styles: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
+Select.defaultProps = {
+  styles: ''
+}
 
 export default Select

@@ -4,7 +4,9 @@ const useCardStyles = () => {
   const cardStyles = {
 
     cardContainer: [
-      'bg-white',
+      
+      'bg-navy-800',
+      // 'bg-white',
       'shadow',
       'rounded-lg',
       'sm:rounded-lg',
@@ -16,5 +18,7 @@ const useCardStyles = () => {
 
   return createStyles(cardStyles)
 }
+
+export const cardStyles = useCardStyles()
 
 export default useCardStyles

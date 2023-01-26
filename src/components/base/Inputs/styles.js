@@ -6,8 +6,9 @@ export const useTxtFldStyles = (err) => {
     label: [
       'block',
       'text-sm',
-      'font-medium',
-      'text-gray-700'
+      'font-semibold',
+      'text-navy-200'
+      // 'text-gray-700'
     ],
 
     inputContainer: [
@@ -20,13 +21,19 @@ export const useTxtFldStyles = (err) => {
     input: [
       'block',
       'w-full',
+
+      'bg-navy-900',
+      'text-navy-200',
+      'border-navy-200',
+      'font-medium',
+
       'rounded-md',
       'pr-10',
 
       'focus:outline-none',
       'sm:text-sm',
 
-      err ? 'border-red-300' : 'border-gray-300',
+      err ? 'border-red-300' : 'border-navy-200',
 
       err ? 'focus:border-red-500' : 'focus:border-indigo-500',
       err ? 'focus:ring-red-500' : 'focus:ring-indigo-500'
@@ -60,37 +67,49 @@ export const useTxtFldStyles = (err) => {
   return createStyles(txtFldStyles)
 }
 
+export const txtFldStylesNoErr = useTxtFldStyles()
+
 
 export const useSlctStyles = () => {
   const slctStyles = {
-
     label: [
       'block',
       'text-sm',
-      'font-medium',
-      'text-gray-700'
+      'font-semibold',
+      'text-navy-200'
+      // 'text-gray-700'
     ],
 
     select: [
+      'bg-navy-900',
+      'text-navy-200',
       'mt-1',
       'w-full',
+      'font-medium',
       'rounded-md',
-      'border-gray-300',
+      // 'border-gray-300',
+      'border-navy-200',
       'py-2',
       'pl-3',
       'pr-10',
       'text-base',
 
       'sm:text-sm',
-      'focus:border-indigo-500',
-      'focus:outline-none',
-      'focus:ring-indigo-500',
-      
+      // 'focus:border-indigo-500',
+      // 'focus:outline-none',
+      // 'focus:ring-indigo-500', 
+    ],
+
+    options: [
+      'bg-navy-800',
+      'text-navy-200'
     ]
   }
 
   return createStyles(slctStyles)
 }
+
+export const slctStyles = useSlctStyles()
 
 export const useBtnStyles = () => {
   const btnStyles = {
@@ -101,14 +120,19 @@ export const useBtnStyles = () => {
       'py-2', 
       'px-4', 
       'text-sm', 
-      'font-medium',
+      'font-semibold',
+      'bg-navy-300',
+      'hover:bg-navy-200',
+      'text-black',
 
       'focus:outline-none', 
       'focus:ring-2', 
-      'focus:ring-indigo-500', 
-      'focus:ring-offset-2' 
+      'focus:ring-offset-1' ,
+      'border-transparent',
     ]
   }
 
   return createStyles(btnStyles)
 }
+
+export const btnStyles = useBtnStyles()

@@ -35,22 +35,16 @@ const useDraftInputSytles = () => {
       'justify-end'
     ],
 
-    cancelBtn: [
-      'bg-white',
-      'hover:bg-gray-50',
-      'border-gray-300',
-      'text-gray-700',
+    clearBtn: [
+      'bg-cerise-dark-700',
+      'hover:bg-cerise-dark-500',
+      'text-white',
     ],
 
     draftBtn: [
       'ml-3',
       'inline-flex',
       'justify-center',
-      'border-transparent',
-      'text-white',
-
-      'bg-indigo-600',
-      'hover:bg-indigo-700',
 
     ]
     

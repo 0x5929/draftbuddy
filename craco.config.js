@@ -11,4 +11,17 @@ module.exports = {
       '@Utils': path.resolve(__dirname, 'src/utils')
     }
   },
+  jest: {
+    configure: {
+      moduleNameMapper: {
+        "^@/(.*)$": "<rootDir>/src$1",
+        "^@App(.*)$": "<rootDir>/src/app$1",
+        "^@Assets(.*)$": "<rootDir>/src/assets$1",
+        "^@Containers(.*)$": "<rootDir>/src/containers$1",
+        "^@Components(.*)$": "<rootDir>/src/components$1",
+        "^@Hooks(.*)$": "<rootDir>/src/hooks$1",
+        "^@Utils(.*)$": "<rootDir>/src/utils$1"
+      }
+    }
+  }
 };
