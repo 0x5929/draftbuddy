@@ -26,7 +26,7 @@ function TextField({register, errors, name, id, validation, styles}) {
         {
           errors[id] && 
             <div className={baseStyles.iconContainer} role="alert">
-              <ExclamationCircleIcon className={baseStyles.icon} aria-hidden="true" />
+              <ExclamationCircleIcon data-testid='exlamation-icon' className={baseStyles.icon} aria-hidden="true" />
             </div>
         }
       </div>
