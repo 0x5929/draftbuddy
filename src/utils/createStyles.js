@@ -10,7 +10,12 @@ function createStyles(style) {
   const result = {}
 
   for (const [key, value] of Object.entries(style)) {
+    // if (typeof value === 'string') {
+    //   return style
+    // }
+
     result[key] = value.join(' ')
+
   }
   return result
 }

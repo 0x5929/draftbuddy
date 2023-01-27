@@ -7,8 +7,8 @@ export const useTxtFldStyles = (err) => {
       'block',
       'text-sm',
       'font-semibold',
-      'text-navy-200'
-      // 'text-gray-700'
+      'text-gray-700',
+      'dark:text-navy-200'
     ],
 
     inputContainer: [
@@ -22,10 +22,12 @@ export const useTxtFldStyles = (err) => {
       'block',
       'w-full',
 
-      'bg-navy-900',
-      'text-navy-200',
+      'dark:bg-navy-900',
+      'dark:text-navy-200',
       'border-navy-200',
       'font-medium',
+
+
 
       'rounded-md',
       'pr-10',
@@ -35,8 +37,8 @@ export const useTxtFldStyles = (err) => {
 
       err ? 'border-red-300' : 'border-navy-200',
 
-      err ? 'focus:border-red-500' : 'focus:border-indigo-500',
-      err ? 'focus:ring-red-500' : 'focus:ring-indigo-500'
+      err ? 'focus:border-red-500' : 'focus:border-blue-500',
+      err ? 'focus:ring-red-500' : 'focus:ring-blue-500'
     ],
 
     iconContainer: [
@@ -76,18 +78,18 @@ export const useSlctStyles = () => {
       'block',
       'text-sm',
       'font-semibold',
-      'text-navy-200'
-      // 'text-gray-700'
+      'text-navy-800',
+      'dark:text-navy-200'
     ],
 
     select: [
-      'bg-navy-900',
-      'text-navy-200',
+      'dark:bg-navy-900',
+      'text-navy-800',
+      'dark:text-navy-200',
       'mt-1',
       'w-full',
       'font-medium',
       'rounded-md',
-      // 'border-gray-300',
       'border-navy-200',
       'py-2',
       'pl-3',
@@ -95,14 +97,15 @@ export const useSlctStyles = () => {
       'text-base',
 
       'sm:text-sm',
-      // 'focus:border-indigo-500',
-      // 'focus:outline-none',
-      // 'focus:ring-indigo-500', 
+      'focus:border-blue-500',
+      'focus:outline-none',
+      'focus:ring-blue-500', 
     ],
 
     options: [
-      'bg-navy-800',
-      'text-navy-200'
+      'dark:bg-navy-800',
+      'text-navy-800',
+      'dark:text-navy-200'
     ]
   }
 
@@ -121,9 +124,12 @@ export const useBtnStyles = () => {
       'px-4', 
       'text-sm', 
       'font-semibold',
-      'bg-navy-300',
+      'bg-navy-500',
+      'dark:bg-navy-300',
+      'dark:hover:bg-navy-200',
       'hover:bg-navy-200',
-      'text-black',
+      'text-white',
+      'dark:text-black',
 
       'focus:outline-none', 
       'focus:ring-2', 

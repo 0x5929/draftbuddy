@@ -23,7 +23,7 @@ export default function DraftInput() {
     // form container 
     <div className={styles.formContainer} role="form">
       <form className={styles.form} action="#" method="POST">
-        <Card>
+        <Card styles={styles.cardContainer}>
           <div className={styles.gridContainer}>
             <div className={styles.gridColumn}>
               <Select

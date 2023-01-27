@@ -63,6 +63,8 @@ module.exports = {
     'no-restricted-syntax': 0,
     'import/prefer-default-export' : 0,
     'react/button-has-type': 0,
+    'jsx-a11y/anchor-is-valid': 0,
+    'jsx-a11y/no-redundant-roles': 1,
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
   }
 }

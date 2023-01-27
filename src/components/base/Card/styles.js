@@ -5,8 +5,8 @@ const useCardStyles = () => {
 
     cardContainer: [
       
-      'bg-navy-800',
-      // 'bg-white',
+      'bg-white',
+      'dark:bg-navy-800',
       'shadow',
       'rounded-lg',
       'sm:rounded-lg',

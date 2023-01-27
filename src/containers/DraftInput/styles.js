@@ -10,6 +10,10 @@ const useDraftInputSytles = () => {
       'items-center'
     ],
 
+    cardContainer: [
+      'mt-5'
+    ],
+
     form: [
       'space-y-6'
     ],
@@ -36,8 +40,10 @@ const useDraftInputSytles = () => {
     ],
 
     clearBtn: [
-      'bg-cerise-dark-700',
-      'hover:bg-cerise-dark-500',
+      'bg-cerise-500',
+      'dark:bg-cerise-dark-700',
+      'dark:hover:bg-cerise-dark-600',
+      'hover:bg-cerise-dark-300',
       'text-white',
     ],
 
