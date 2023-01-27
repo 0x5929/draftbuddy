@@ -15,6 +15,7 @@
     "tailwind-merge": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "https://fantasyfootballcalculator.com",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

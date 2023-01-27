@@ -1,17 +1,40 @@
+import { useEffect, useState } from 'react'
 import {  QueryClient, QueryClientProvider } from 'react-query'
+
 import '@App/app.css';
 import { DraftInput, Header} from '@Containers'
 
 const queryClient = new QueryClient()
 
 function App() {
+  
+  const [ servRes, setServRes ] = useState(null)
+
+  // useEffect(() => {
+  //   // every rerender
+  //   setPostData(null)
+  //   setServRes(null)
+
+  // })
+
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <div className="bg-green-300 border-green-600 border-b p-4 m-4 rounded">
-        Hello World draftbuddy
-      </div> */}
+
       <Header />
-      <DraftInput />
+
+
+      {
+        !servRes ? 
+        <DraftInput setServRes={setServRes} />
+
+        :
+        
+        <div>hello world DraftOutput</div>
+
+
+      }
+
+      
     </QueryClientProvider>
   );
 }

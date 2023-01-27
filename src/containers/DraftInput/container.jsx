@@ -1,13 +1,18 @@
 // going to be a nice looking form
 // composed of components that is styled at the component lvl
+import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import { useQuery } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { useAPIQuery } from '@Hooks'
 
 import { Card, TextField, Select, Button } from '@Components'
 import useDraftInputSytles from './styles'
 
-export default function DraftInput() {
+function DraftInput({ setServRes }) {
 
+  const [ postData, setPostData ] = useState(null)
+  const styles = useDraftInputSytles()
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues : {
       leagueFormat: '1/2 PPR',
@@ -15,9 +20,34 @@ export default function DraftInput() {
     }
   })
 
-  const styles = useDraftInputSytles()
+  const queryFunc = useAPIQuery()
+  const { isLoading, data, refetch } = useQuery(['fetchFtbllAPI', postData], () => queryFunc(postData), {enabled: false})
 
-  const onSubmit = data => useAPIQuery(data)
+  const onSubmit = (formData) => {
+    setPostData({...formData})
+  }
+
+  useEffect(() => () => {
+      // component dismount
+      setPostData(null)
+    }, [])
+
+  useEffect(() => {
+    if(postData) refetch()
+
+  }, [postData])
+
+
+  useEffect(() => {
+    if (data) {
+      console.log('data: ', data)
+      setServRes(data)
+    }
+
+  }, [data])
+
+  if (isLoading) return 'hello world, data is loading'
+
 
   return (
     // form container 
@@ -44,8 +74,8 @@ export default function DraftInput() {
                 validation={{ 
                   required: 'This field is required.' , 
                   pattern: { 
-                    value:  /^(8|10|12|14|16)$/i, 
-                    message: 'Please enter an even # between 8 to 16.' }}}
+                    value:  /^(8|10|12|14)$/i, 
+                    message: 'Please enter an even # between 8 to 14.' }}}
               />
             </div>
           </div>
@@ -72,3 +102,10 @@ export default function DraftInput() {
     </div>
   )
 }
+
+
+DraftInput.propTypes = {
+  setServRes: PropTypes.func.isRequired
+}
+
+export default DraftInput

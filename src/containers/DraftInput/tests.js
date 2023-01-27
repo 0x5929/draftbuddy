@@ -1,7 +1,7 @@
+import {  QueryClient, QueryClientProvider } from 'react-query'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render, screen, cleanup, fireEvent, act } from '@testing-library/react'
-import * as useAPIQuery from '@Hooks/useAPIQuery'
 import preview from 'jest-preview'
 import DraftInput from '.'
 
@@ -13,11 +13,21 @@ import DraftInput from '.'
  * 
  */
 
+const queryClient = new QueryClient()
+
 describe('testing DraftInput container', () => {
 
+  let mockSetServRes
 
   beforeEach(() => {
-    render(<DraftInput />)
+
+    mockSetServRes = jest.fn()
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <DraftInput setServRes={mockSetServRes()} />
+      </QueryClientProvider>
+    )
   })
 
   test('container should contain input form and fields', () => {
@@ -78,16 +88,14 @@ describe('testing DraftInput container', () => {
       fireEvent.click(screen.getByText('Draft'))
     })
     expect(screen.getAllByRole('alert')).toHaveLength(2)
-    expect(screen.getByText('Please enter an even # between 8 to 16.'))
+    expect(screen.getByText('Please enter an even # between 8 to 14.'))
 
     // preview.debug()
   })
 
+  // this test need to be chagned from testing if functions are called, but instead, what happens after
+  // draft button is pressed, ie, grabs data and calculates in algo, and spits out some display, now we can await and expect/assert the displays
   test('draft button should work as expected onClick with validation success', async () => {
-      // mock API function called once submitted
-      const mockUseAPIQuery = jest.spyOn(useAPIQuery, 'default')
-      mockUseAPIQuery.mockImplementation(() => Promise.resolve("data"))
-
       // enter inputs
       await act(async () => {
         await userEvent.type(screen.getByRole('textbox'), '10')
@@ -95,7 +103,9 @@ describe('testing DraftInput container', () => {
       await act(async () => {
         fireEvent.click(screen.getByText('Draft'))
       })
-      expect(mockUseAPIQuery).toBeCalled()
+
+      // assert server response setter called
+      expect(mockSetServRes).toHaveBeenCalledTimes(1)
   })
 
   test('clear button should work as expected onClick', async () => {
@@ -125,6 +135,8 @@ describe('testing DraftInput container', () => {
 
 
   afterEach(() => {
+    
+    mockSetServRes = null
     jest.restoreAllMocks()
     cleanup()
   })
