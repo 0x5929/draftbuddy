@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { useForm } from 'react-hook-form'
-import { useAPIQuery } from '@Hooks'
+import { useFetch } from '@Hooks'
 
 import { Card, TextField, Select, Button } from '@Components'
 import useDraftInputSytles from './styles'
 
 function DraftInput({ setServRes }) {
 
-  const [ postData, setPostData ] = useState(null)
+  const [ getParams, setGetParams ] = useState(null)
   const styles = useDraftInputSytles()
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues : {
@@ -20,22 +20,22 @@ function DraftInput({ setServRes }) {
     }
   })
 
-  const queryFunc = useAPIQuery()
-  const { isLoading, data, refetch } = useQuery(['fetchFtbllAPI', postData], () => queryFunc(postData), {enabled: false})
+  const fetchData = useFetch()
+  const { isLoading, data, refetch } = useQuery(['fetchFtbllAPI', getParams], () => fetchData(getParams), {enabled: false})
 
   const onSubmit = (formData) => {
-    setPostData({...formData})
+    setGetParams({...formData})
   }
 
   useEffect(() => () => {
       // component dismount
-      setPostData(null)
+      setGetParams(null)
     }, [])
 
   useEffect(() => {
-    if(postData) refetch()
+    if(getParams) refetch()
 
-  }, [postData])
+  }, [getParams])
 
 
   useEffect(() => {

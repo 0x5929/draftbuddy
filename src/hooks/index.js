@@ -1,1 +1,1 @@
-export { default as useAPIQuery } from './useAPIQuery'
+export { default as useFetch } from './useFetch'

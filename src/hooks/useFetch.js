@@ -1,6 +1,6 @@
 import { useQueryClient } from 'react-query'
 
-function useAPIQuery() {
+function useFetch() {
   const queryClient = useQueryClient()
 
   function mapData(format) {
@@ -18,10 +18,11 @@ function useAPIQuery() {
   function getYear() {
     return (new Date().getFullYear() - 2).toString()
   }
+  
 
-  const queryFunc = async (postData) => {
-    const format = mapData(postData?.leagueFormat)
-    const headCount = postData?.headCount
+  const fetchData = async (getParams) => {
+    const format = mapData(getParams?.leagueFormat)
+    const headCount = getParams?.headCount
     const year = getYear()
     
     // cancel query if no param. ie initializing
@@ -38,14 +39,17 @@ function useAPIQuery() {
     const resp = await fetch(url)
     const data = await resp.json()
 
+    // algo part with data, 
+    // then lastly, return it to DraftOuput
+    // that way, isLoading would be true, and spinning would work
     return data  
   }
 
   
-  return queryFunc
+  return fetchData
 
 }
 
 
-export default useAPIQuery
+export default useFetch
 
