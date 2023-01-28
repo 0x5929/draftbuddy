@@ -33,7 +33,7 @@ describe('testing DraftInput container', () => {
   test('container should contain input form and fields', () => {
     expect(screen.getByRole('form')).toBeInTheDocument()
     expect(screen.getByRole('combobox', {name: 'League Format'})).toBeInTheDocument()
-    expect(screen.getByRole('textbox')).toBeInTheDocument()
+    expect(screen.getAllByRole('textbox')).toHaveLength(2)
     expect(screen.getAllByRole('button')).toHaveLength(2)
   })
 
@@ -62,13 +62,27 @@ describe('testing DraftInput container', () => {
 
     await act(async () => {
       userEvent.type(screen.getByLabelText('# of Participants'), '8')
+      userEvent.type(screen.getByLabelText('Pick #'), '8')
     })
     expect(screen.getByLabelText('# of Participants')).toHaveValue('8')
+    expect(screen.getByLabelText('Pick #')).toHaveValue('8')
 
     await act(async () => {
+      userEvent.clear(screen.getByLabelText('Pick #'))
       userEvent.clear(screen.getByLabelText('# of Participants'))
     })
     expect(screen.getByLabelText('# of Participants')).toHaveValue('')
+    expect(screen.getByLabelText('Pick #')).toHaveValue('')
+  })
+
+  test('pickNumber input is disabled until headCount is entered', async () => {
+    expect(screen.getByLabelText('Pick #')).toBeDisabled()
+    
+    await act(async () => {
+      userEvent.type(screen.getByLabelText('# of Participants'), '8')
+    })
+    
+    expect(screen.getByLabelText('Pick #')).not.toBeDisabled()
   })
 
   test('draft button should work as expected onClick with validation failure', async () => {
@@ -77,18 +91,20 @@ describe('testing DraftInput container', () => {
     await act(async () => {
       fireEvent.click(screen.getByText('Draft'))
     })
-    expect(screen.getAllByRole('alert')).toHaveLength(2)
-    expect(screen.getByText('This field is required.')).toBeInTheDocument()
+    expect(screen.getAllByRole('alert')).toHaveLength(4)
+    expect(screen.getAllByText('This field is required.')).toHaveLength(2)
 
     // test by typing wrong inputs
     await act(async () => {
-      await userEvent.type(screen.getByRole('textbox'), '7')
+      await userEvent.type(screen.getByLabelText('# of Participants'), '7')
+      await userEvent.type(screen.getByLabelText('Pick #'), '9')
     })
     await act(async () => {
       fireEvent.click(screen.getByText('Draft'))
     })
-    expect(screen.getAllByRole('alert')).toHaveLength(2)
-    expect(screen.getByText('Please enter an even # between 8 to 14.'))
+    expect(screen.getAllByRole('alert')).toHaveLength(4)
+    expect(screen.getByText('Please enter an even # between 8 to 14.')).toBeInTheDocument()
+    expect(screen.getByText('Please enter a valid draft pick.')).toBeInTheDocument()
 
     // preview.debug()
   })
@@ -98,7 +114,8 @@ describe('testing DraftInput container', () => {
   test('draft button should work as expected onClick with validation success', async () => {
       // enter inputs
       await act(async () => {
-        await userEvent.type(screen.getByRole('textbox'), '10')
+        await userEvent.type(screen.getByLabelText('# of Participants'), '10')
+        await userEvent.type(screen.getByLabelText('Pick #'), '10')
       })
       await act(async () => {
         fireEvent.click(screen.getByText('Draft'))
@@ -117,7 +134,8 @@ describe('testing DraftInput container', () => {
     )
 
     await act(async () => {
-      await userEvent.type(screen.getByRole('textbox'), '8')
+      await userEvent.type(screen.getByLabelText('# of Participants'), '8')
+      await userEvent.type(screen.getByLabelText('Pick #'), '8')
     })
     expect(screen.getByRole('option', {name: 'Standard non PPR'}).selected).toBe(true)
     expect(screen.getByRole('option', {name: 'Points Per Reception (PPR)'}).selected).toBe(false)
@@ -131,6 +149,7 @@ describe('testing DraftInput container', () => {
     expect(screen.getByRole('option', {name: 'Points Per Reception (PPR)'}).selected).toBe(false)
     expect(screen.getByRole('option', {name: '1/2 PPR'}).selected).toBe(true)
     expect(screen.getByLabelText('# of Participants')).toHaveValue('')
+    expect(screen.getByLabelText('Pick #')).toHaveValue('')
   })
 
 

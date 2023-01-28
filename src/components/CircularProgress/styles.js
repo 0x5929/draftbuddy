@@ -1,4 +1,4 @@
-import createStyles from "@Utils"
+import { createStyles } from "@Utils"
 
 const useSpnrStyles = () => {
   const spnrStyles = {

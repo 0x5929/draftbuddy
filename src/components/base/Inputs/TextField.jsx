@@ -3,7 +3,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
 import { twMerge } from 'tailwind-merge'
 import { useTxtFldStyles } from './styles'
 
-function TextField({register, errors, name, id, validation, styles}) {
+function TextField({register, errors, name, id, validation, styles, ...others}) {
 
   const baseStyles = useTxtFldStyles(errors[id])
 
@@ -15,13 +15,15 @@ function TextField({register, errors, name, id, validation, styles}) {
 
       <div className={baseStyles.inputContainer}>
         <input          
-          {...register(id, validation)}
+          { ...register(id, validation) }
 
           type="text"
           name={id}
           id={id}
           className={twMerge(baseStyles.input, styles)}
           aria-invalid={errors[id] ? 'true' : 'false'}
+
+          { ...others }
         />
         {
           errors[id] && 

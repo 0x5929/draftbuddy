@@ -1,27 +1,30 @@
-// going to be a nice looking form
-// composed of components that is styled at the component lvl
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { useForm } from 'react-hook-form'
-import { useFetch } from '@Hooks'
 
+import { validatePick } from '@Utils'
+import { useFetch } from '@Hooks'
 import { Card, TextField, Select, Button } from '@Components'
+
 import useDraftInputSytles from './styles'
 
 function DraftInput({ setServRes }) {
 
-  const [ getParams, setGetParams ] = useState(null)
-  const styles = useDraftInputSytles()
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, watch, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues : {
       leagueFormat: '1/2 PPR',
-      headCount: ''
+      headCount: '',
+      pickNumber: ''
     }
   })
 
+  const [ getParams, setGetParams ] = useState(null)
+  const styles = useDraftInputSytles()
   const fetchData = useFetch()
   const { isLoading, data, refetch } = useQuery(['fetchFtbllAPI', getParams], () => fetchData(getParams), {enabled: false})
+  const watchHc = watch('headCount')
+
 
   const onSubmit = (formData) => {
     setGetParams({...formData})
@@ -77,6 +80,21 @@ function DraftInput({ setServRes }) {
                     value:  /^(8|10|12|14)$/i, 
                     message: 'Please enter an even # between 8 to 14.' }}}
               />
+              <TextField 
+                register={register}
+                errors={errors}
+                name='Pick #'
+                id='pickNumber'
+                validation={{
+                  required: 'This field is required.',
+                  validate: {  
+                    pattern: validatePick(watchHc)
+                
+                  }
+                }}
+                disabled={watchHc === ''}
+
+              />
             </div>
           </div>
         </Card>
@@ -86,7 +104,8 @@ function DraftInput({ setServRes }) {
             styles={styles.clearBtn}
             onClick={() => reset({
               leagueFormat: '1/2 PPR',
-              headCount: ''
+              headCount: '',
+              pickNumber: ''
             })}
 
           />
