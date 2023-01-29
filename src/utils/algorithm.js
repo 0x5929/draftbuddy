@@ -35,8 +35,19 @@ function algorithm ({headCount, draftPick, data}) {
     }
 
     // get each round pick based on pick #
-
     // get Overall Draft Picks (ODPs) based by adding each round pick
+    const ODP = []
+    for (let i = 0; i < 15; i++ ) {
+      ODP.push({
+        round: i + 1,
+        pick: draft[i].indexOf(parseInt(draftPick, 10)),
+        
+        // calculate ODP: base rounds (roundNum x headCount) + current pick 
+        ODP: ((i + 1) * (headCount)) + (draft[i].indexOf(parseInt(draftPick, 10)))
+      })
+    }
+
+    console.log(ODP)
 
 
   }
