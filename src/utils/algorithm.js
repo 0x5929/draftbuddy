@@ -20,17 +20,18 @@ function algorithm ({headCount, draftPick, data}) {
   function resolveOPNs() {
     // create base array
     const base = [...Array(parseInt(headCount, 10)).keys()].map(x => x + 1)
-    
+    const reverseBase = [...Array(parseInt(headCount, 10)).keys()].map(x => x + 1).reverse()
+
     // total 15 of these arrays in one draft array
     const draft = []
-    for (let i = 0; i < 15; i++) {
-      if (((i + 1) % 2) === 1){
+    for (let i = 1; i <= 15; i++) {
+      if ((i % 2) === 1){
         // odd number is always reg order
-        draft.push([...base])
+        draft.push(base)
       }
       else {
         // even number is always rev order
-        draft.push([...base.reverse()])
+        draft.push(reverseBase)
       }
     }
 
@@ -40,21 +41,62 @@ function algorithm ({headCount, draftPick, data}) {
     for (let i = 0; i < 15; i++ ) {
       ODP.push({
         round: i + 1,
-        pick: draft[i].indexOf(parseInt(draftPick, 10)),
+        pick: draft[i].indexOf(parseInt(draftPick, 10)) + 1,
         
         // calculate ODP: base rounds (roundNum x headCount) + current pick 
-        ODP: ((i + 1) * (headCount)) + (draft[i].indexOf(parseInt(draftPick, 10)))
+        ODP: i === 0 ? 
+          draft[i].indexOf(parseInt(draftPick, 10)) + 1
+          : 
+          (i * headCount) + (draft[i].indexOf(parseInt(draftPick, 10)) + 1) 
       })
     }
 
-    console.log(ODP)
+    return ODP
 
 
   }
-  function sortData() {}
+  function sortData(ODP) {
+
+    // sort players by ADP value, higher gets pushed.
+    const adpSort = (a, b) => {
+      let comp 
+      if (a.adp === b.adp) {
+        comp = 0
+      }
+      else if (a.adp < b.adp){
+        comp = -1
+      }
+      else if (b.adp < a.adp) {
+        comp = 1
+      }
+
+      return comp
+
+    }
+
+    // sort data base on ODP, into what we can display in DraftOutput
+    const { players } = data
+    const playerSorted = players.sort(adpSort)
+    // const qbs = players.filter((el) => el.position === 'QB').sort(adpSort)
+    // const rbs = players.filter((el) => el.position === 'RB').sort(adpSort)
+    // const wrs = players.filter((el) => el.position === 'WR').sort(adpSort)
+    // const tes = players.filter((el) => el.position === 'TE').sort(adpSort)
+
+    // console.log('data.players: ', data.players)
+    // console.log('qbs: ', qbs)
+    // console.log('rbs: ', rbs)
+    // console.log('wrs: ', wrs)
+    // console.log('tes: ', tes)
+    return data
+  }
 
   
-  function main() {}
+  function main() {
+    const ODP = resolveOPNs()
+    return sortData(ODP)
+
+    
+  }
 
   return main()
 }

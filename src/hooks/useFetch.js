@@ -1,4 +1,5 @@
 import { useQueryClient } from 'react-query'
+import { algorithm } from '@Utils'
 
 function useFetch() {
   const queryClient = useQueryClient()
@@ -42,6 +43,7 @@ function useFetch() {
     // algo part with data, 
     // then lastly, return it to DraftOuput
     // that way, isLoading would be true, and spinning would work
+    algorithm({headCount, draftPick: getParams?.pickNumber, data})
     return data  
   }
 
