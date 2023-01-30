@@ -77,6 +77,9 @@ function algorithm ({headCount, draftPick, data}) {
     // sort data base on ODP, into what we can display in DraftOutput
     const { players } = data
     const playerSorted = players.sort(adpSort)
+
+    // look in small radius, for three, then apply rules to three. 
+    // then if not look in bigger (repeate above step with bigger radius, until three is found)
     // const qbs = players.filter((el) => el.position === 'QB').sort(adpSort)
     // const rbs = players.filter((el) => el.position === 'RB').sort(adpSort)
     // const wrs = players.filter((el) => el.position === 'WR').sort(adpSort)
