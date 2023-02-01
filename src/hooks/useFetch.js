@@ -41,9 +41,9 @@ function useFetch() {
     const data = await resp.json()
 
     const sortedData = await algorithm({
+      data,
       headCount, 
-      draftPick: getParams?.pickNumber, 
-      data
+      draftPick: getParams?.pickNumber
     })
 
     // algo part with data, 
