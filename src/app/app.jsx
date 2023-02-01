@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {  QueryClient, QueryClientProvider } from 'react-query'
 
-import '@App/app.css';
-import { DraftInput, DraftOutput, Header} from '@Containers'
+import '@App/app.css'
+import { DraftInput, DraftOutput, Header } from '@Containers'
 
 const queryClient = new QueryClient()
 
@@ -17,7 +17,7 @@ function App() {
         !servRes ? 
         <DraftInput setServRes={setServRes} />
         :
-        <DraftOutput />
+        <DraftOutput data={servRes} setServRes={setServRes} />
       }
     </QueryClientProvider>
   )

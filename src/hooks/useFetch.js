@@ -40,11 +40,16 @@ function useFetch() {
     const resp = await fetch(url)
     const data = await resp.json()
 
+    const sortedData = await algorithm({
+      headCount, 
+      draftPick: getParams?.pickNumber, 
+      data
+    })
+
     // algo part with data, 
     // then lastly, return it to DraftOuput
     // that way, isLoading would be true, and spinning would work
-    algorithm({headCount, draftPick: getParams?.pickNumber, data})
-    return data  
+    return sortedData  
   }
 
   

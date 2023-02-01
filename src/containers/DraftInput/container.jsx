@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import { validatePick } from '@Utils'
 import { useFetch } from '@Hooks'
-import { Card, TextField, Select, Button } from '@Components'
+import { Card, TextField, Select, Button, CircularProgress } from '@Components'
 
 import useDraftInputSytles from './styles'
 
@@ -22,7 +22,12 @@ function DraftInput({ setServRes }) {
   const [ getParams, setGetParams ] = useState(null)
   const styles = useDraftInputSytles()
   const fetchData = useFetch()
-  const { isLoading, data, refetch } = useQuery(['fetchFtbllAPI', getParams], () => fetchData(getParams), {enabled: false})
+  const { isLoading, data, refetch } = useQuery(
+    ['fetchFtbllAPI', getParams], 
+    () => fetchData(getParams), 
+    {enabled: false}
+  )
+
   const watchHc = watch('headCount')
 
 
@@ -30,10 +35,8 @@ function DraftInput({ setServRes }) {
     setGetParams({...formData})
   }
 
-  useEffect(() => () => {
-      // component dismount
-      setGetParams(null)
-    }, [])
+  // component dismount
+  useEffect(() => () => setGetParams(null), [])
 
   useEffect(() => {
     if(getParams) refetch()
@@ -42,14 +45,11 @@ function DraftInput({ setServRes }) {
 
 
   useEffect(() => {
-    if (data) {
-      console.log('data: ', data)
-      setServRes(data)
-    }
-
+    if (data) setServRes(data)
+  
   }, [data])
 
-  if (isLoading) return 'hello world, data is loading'
+  if (isLoading) return <CircularProgress />
 
 
   return (
@@ -89,7 +89,6 @@ function DraftInput({ setServRes }) {
                   required: 'This field is required.',
                   validate: {  
                     pattern: validatePick(watchHc)
-                
                   }
                 }}
                 disabled={watchHc === ''}
