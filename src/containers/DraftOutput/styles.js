@@ -188,7 +188,8 @@ export const usePlayerCardStyles = () => {
       'pb-4',
       'dark:text-gray-400',
       'border-b',
-      'border-slate-600'
+      'border-slate-200',
+      'dark:border-slate-600',
     ],
 
 
