@@ -59,6 +59,9 @@ function DraftInput({ setServRes }) {
         <Card styles={styles.cardContainer}>
           <div className={styles.gridContainer}>
             <div className={styles.gridColumn}>
+            <p className={styles.titleText}>
+              Draftbuddy Input
+            </p>
               <Select
                 register={register}
                 name='League Format'
@@ -78,7 +81,9 @@ function DraftInput({ setServRes }) {
                   required: 'This field is required.' , 
                   pattern: { 
                     value:  /^(8|10|12|14)$/i, 
-                    message: 'Please enter an even # between 8 to 14.' }}}
+                    message: 'Please enter an even # between 8 to 14.' 
+                  }
+                }}
               />
               <TextField 
                 register={register}

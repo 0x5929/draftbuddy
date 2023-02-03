@@ -75,6 +75,13 @@ function DraftOutput({data, setServRes}) {
                 </button>
             </li>
           </ul>
+          
+          <p className={styles.resultTitle}>
+            Draftbuddy Results
+          </p>
+          <p className={styles.positionTitle}>
+            { `${pos.toUpperCase()}s` }
+          </p>
           <div className={styles.metaInfoContainer}>
             <span className={styles.metaInfo}><p>Round: { data[indx].meta.round }</p></span>
             <span className={styles.metaInfo}><p>Pick: { data[indx].meta.pick }</p></span>
@@ -115,9 +122,20 @@ function PlayerCards ({players}) {
     <div className={styles.tabContentContainer}>
       <div className={styles.playerCardsContainer} role='tabpanel'>
         {
-          players.map((player) =>
+          players.map((player, index) =>
             <Card key={player.player_id} styles={styles.playerCard}>
-              { player.name}
+              <p className={styles.playerCardTitle}>
+                Choice # { index + 1 }
+              </p>
+              <p className={styles.playerCardNameAndTeam}>
+                { player.name }
+              </p>
+              <p className={styles.playerCardNameAndTeam}>
+                { player.team }
+              </p>
+              <p className={styles.playerCardADP}>
+                ADP: { player.adp.toString() }
+              </p>
             </Card>
           )
         }

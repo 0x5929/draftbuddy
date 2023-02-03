@@ -2,7 +2,7 @@ import {  QueryClient, QueryClientProvider } from 'react-query'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render, screen, cleanup, fireEvent, act } from '@testing-library/react'
-import preview from 'jest-preview'
+// import preview from 'jest-preview'
 import DraftInput from '.'
 
 
@@ -28,6 +28,11 @@ describe('testing DraftInput container', () => {
         <DraftInput setServRes={mockSetServRes()} />
       </QueryClientProvider>
     )
+  })
+
+
+  test('container should contain form title', () => {
+    expect(screen.getByText('Draftbuddy Input')).toBeInTheDocument()
   })
 
   test('container should contain input form and fields', () => {

@@ -11,7 +11,9 @@ const useDraftInputSytles = () => {
     ],
 
     cardContainer: [
-      'mt-5'
+      'mt-5',
+      'sm:mt-14',
+      'pt-0',
     ],
 
     form: [
@@ -32,6 +34,15 @@ const useDraftInputSytles = () => {
       'space-y-6',
       'col-auto',
       'md:mt-0'
+    ],
+
+    titleText: [
+      'font-smooch',
+      'text-center',
+      'text-3xl',
+      'underline',
+      'underline-offset-4',
+      'dark:text-white'
     ],
 
     btnContainer: [
