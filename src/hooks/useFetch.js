@@ -33,7 +33,8 @@ function useFetch() {
     }
 
     const url = process.env.NODE_ENV === 'production' ? 
-      `https://fantasyfootballcalculator.com/api/v1/adp/${format}?teams=${headCount}&year=${year}` 
+      `/.netlify/functions/fantasyfootballcalculator-players?format=${format}&headCount=${headCount}&year=${year}`
+      // `https://fantasyfootballcalculator.com/api/v1/adp/${format}?teams=${headCount}&year=${year}` 
         :
       `/api/v1/adp/${format}?teams=${headCount}&year=${year}`
 
