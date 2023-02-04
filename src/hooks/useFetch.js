@@ -37,18 +37,19 @@ function useFetch() {
         :
       `/api/v1/adp/${format}?teams=${headCount}&year=${year}`
 
+    // first promise resolve
     const resp = await fetch(url)
-    const data = await resp.json()
 
+    // second promise resolve
+    const data = await resp.json()
+    
+    // third promise resolve
     const sortedData = await algorithm({
       data,
       headCount, 
       draftPick: getParams?.pickNumber
     })
 
-    // algo part with data, 
-    // then lastly, return it to DraftOuput
-    // that way, isLoading would be true, and spinning would work
     return sortedData  
   }
 

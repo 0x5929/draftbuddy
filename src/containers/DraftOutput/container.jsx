@@ -5,8 +5,8 @@ import {
   ChevronLeftIcon
 } from '@heroicons/react/24/outline'
 
-import { Card, Button } from '@Components'
-import { useDraftOutputStyles, usePlayerCardStyles } from './styles'
+import { Card, Button, PlayerCard } from '@Components'
+import useDraftOutputStyles from './styles'
 
 function DraftOutput({data, setServRes}) {
   const [ pos, setPos ] = useState('rb')
@@ -87,7 +87,7 @@ function DraftOutput({data, setServRes}) {
             <span className={styles.metaInfo}><p>Pick: { data[indx].meta.pick }</p></span>
             <span className={styles.metaInfo}><p>Overall: { data[indx].meta.ODP  }</p></span>
           </div>
-          <PlayerCards players={data[indx].players[pos]}/>
+          <PlayerCard players={data[indx].players[pos]} />
           <div className={styles.backToDraftBtnContainer}>
             <Button 
               text='Back to Draft Input'
@@ -115,34 +115,6 @@ function DraftOutput({data, setServRes}) {
 }
 
 
-function PlayerCards ({players}) {
-  const styles = usePlayerCardStyles()
-
-  return (
-    <div className={styles.tabContentContainer}>
-      <div className={styles.playerCardsContainer} role='tabpanel'>
-        {
-          players.map((player, index) =>
-            <Card key={player.player_id} styles={styles.playerCard}>
-              <p className={styles.playerCardTitle}>
-                Choice # { index + 1 }
-              </p>
-              <p className={styles.playerCardNameAndTeam}>
-                { player.name }
-              </p>
-              <p className={styles.playerCardNameAndTeam}>
-                { player.team }
-              </p>
-              <p className={styles.playerCardADP}>
-                ADP: { player.adp.toString() }
-              </p>
-            </Card>
-          )
-        }
-      </div>
-    </div>
-  )
-}
 
 DraftOutput.propTypes = {
   data: 
@@ -170,15 +142,5 @@ DraftOutput.propTypes = {
 
 }
 
-PlayerCards.propTypes = {
-  players:  PropTypes.arrayOf(
-    PropTypes.objectOf(
-      PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string,
-      ])
-    )).isRequired
-
-}
 
 export default DraftOutput

@@ -11,102 +11,153 @@ import {
   SunIcon
 } from '@heroicons/react/24/outline'
 
+import { useMenuModals } from '@Hooks'
+import { READMEModal, PrivacyModal, TermsOfUseModal, CookiePolicyModal } from '@Components'
 import useHeaderStyles from './styles'
 
-const menuItems = [
-  {
-    text: 'README',
-    href: '#',
-    icon: BookOpenIcon,
-  },
-  {
-    text: 'Terms and Conditions',
-    href: '#',
-    icon: DocumentTextIcon,
-  },
-  { 
-    text: 'Privacy Policy', 
-    href: '#', 
-    icon: EyeSlashIcon },
-  {
-    text: 'Cookie Policy',
-    href: '#',
-    icon: InformationCircleIcon,
-  }
-]
 
 
 
 function Header () {
 
+  const { 
+    isREADMEOpen, 
+    setIsREADMEOpen, 
+    isTermsOfUseOpen, 
+    setIsTermsOfUseOpen,  
+    isPrivacyOpen, 
+    setIsPrivacyOpen,
+    isCookieOpen, 
+    setIsCookieOpen } = useMenuModals()
+
   const styles = useHeaderStyles()
 
+
+  const menuItems = [
+    {
+      text: 'README',
+      href: '#',
+      icon: BookOpenIcon,
+      onClick: () => setIsREADMEOpen(true)
+    },
+    {
+      text: 'Terms and Conditions',
+      href: '#',
+      icon: DocumentTextIcon,
+      onClick: () => setIsTermsOfUseOpen(true)
+    },
+    { 
+      text: 'Privacy Policy', 
+      href: '#', 
+      icon: EyeSlashIcon,
+      onClick: () => setIsPrivacyOpen(true)
+    },
+    {
+      text: 'Cookie Policy',
+      href: '#',
+      icon: InformationCircleIcon,
+      onClick: () => setIsCookieOpen(true)
+    }
+  ]
+  
+
   return (
-    // header container
-    <header>
-      <Popover className={styles.headerContainer} data-testid='nav-header-container'>
-        {/* flexbox container */}
-        <nav className={styles.flexBoxContainer} data-testid='nav-flexbox-container'>
-          {/* menu container */}
-          <div className={styles.menuContainer} data-testid='nav-menu-container'>
-            {/* menu */}
-            <Popover className={styles.menu} data-testid='nav-menu'>
-                  {/* menu Button */}
-                  <Popover.Button
-                    className={styles.menuButton}
-                    data-testid='nav-menu-button'
-                  >
-                    {/* menu icon */}
-                    <Bars3Icon className={styles.menuIcon} data-testid='nav-menu-icon'/>
-                  </Popover.Button>
+    <>
+      {/* // header container */}
+      <header>
+        <Popover className={styles.headerContainer} data-testid='nav-header-container'>
+          {/* flexbox container */}
+          <nav className={styles.flexBoxContainer} data-testid='nav-flexbox-container'>
+            {/* menu container */}
+            <div className={styles.menuContainer} data-testid='nav-menu-container'>
+              {/* menu */}
+              <Popover className={styles.menu} data-testid='nav-menu'>
+                    {/* menu Button */}
+                    <Popover.Button
+                      className={styles.menuButton}
+                      data-testid='nav-menu-button'
+                    >
+                      {/* menu icon */}
+                      <Bars3Icon className={styles.menuIcon} data-testid='nav-menu-icon'/>
+                    </Popover.Button>
 
-                  {/* transition */}
-                  <Transition
-                    as={Fragment}
-                    enter={styles.transitionEnter}
-                    enterFrom={styles.transitionEnterFrom}
-                    enterTo={styles.transitionEnterTo}
-                    leave={styles.transitionLeave}
-                    leaveFrom={styles.transitionLeaveFrom}
-                    leaveTo={styles.transitinoLeaveTo}
-                  >
-                    {/* menu dropdown container */}
-                    <Popover.Panel className={styles.menuDropDownContainer} data-testid='nav-menu-dropdown-container'>
-                      {/*  menu dropdown */}
-                      <div className={styles.menuDropDown} data-testid='nav-menu-dropdown'>
-                        {/* menu dropdown grid */}
-                        <div className={styles.menuDropDownGrid} data-testid='nav-menu-dropdown-grid'>
-                          {menuItems.map((item) => (
-                            // menu item link
-                            <a
-                              key={item.text}
-                              href={item.href}
-                              className={styles.menuItemLink}
-                              data-testid='nav-menu-item-link'
-                            >
-                              {/* menu item icon */}
-                              <item.icon className={styles.menuItemIcon} data-testid='nav-menu-item-icon' aria-hidden="true" />
-                              {/* menu item text container */}
-                              <div className={styles.menuItemTextContainer} data-testid='nav-menu-item-text-container'>
-                                {/* menu item text */}
-                                <p className={styles.menuItemText} data-testid='nav-menu-item-text'>{item.text}</p>
+                    {/* transition */}
+                    <Transition
+                      as={Fragment}
+                      enter={styles.transitionEnter}
+                      enterFrom={styles.transitionEnterFrom}
+                      enterTo={styles.transitionEnterTo}
+                      leave={styles.transitionLeave}
+                      leaveFrom={styles.transitionLeaveFrom}
+                      leaveTo={styles.transitinoLeaveTo}
+                    >
+                      {/* menu dropdown container */}
+                      <Popover.Panel className={styles.menuDropDownContainer} data-testid='nav-menu-dropdown-container'>
+
+                        { ({ close }) =>    
+                          <>
+                            {/*  menu dropdown */}
+                            <div className={styles.menuDropDown} data-testid='nav-menu-dropdown'>
+                              {/* menu dropdown grid */}
+                              <div className={styles.menuDropDownGrid} data-testid='nav-menu-dropdown-grid'>
+                                {menuItems.map((item) => (
+                                  // menu item link
+                                    <a
+                                      key={item.text}
+                                      href={item.href}
+                                      className={styles.menuItemLink}
+                                      data-testid='nav-menu-item-link'
+                                      onClick={() =>{ close(); item.onClick();}}
+                                    >
+                                      {/* menu item icon */}
+                                      <item.icon className={styles.menuItemIcon} data-testid='nav-menu-item-icon' aria-hidden="true" />
+                                      {/* menu item text container */}
+                                      <div className={styles.menuItemTextContainer} data-testid='nav-menu-item-text-container'>
+                                        {/* menu item text */}
+                                        <p className={styles.menuItemText} data-testid='nav-menu-item-text'>{item.text}</p>
+                                      </div>
+                                    </a>
+                                  ))
+                                }
+
                               </div>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </Popover.Panel>
-                  </Transition>
+                            </div>
+                          </>
+                        }
 
-            </Popover>
-          </div>
-          {/* modeswitcher container */}
-          <div className={styles.modeSwitcherContainer} data-testid='nav-modeswitcher'>
-            <ModeSwitcher styles={styles.modeSwitcher} />
-          </div>
-        </nav>
-      </Popover>
-    </header>
+                      </Popover.Panel>
+                    </Transition>
+
+              </Popover>
+            </div>
+            {/* modeswitcher container */}
+            <div className={styles.modeSwitcherContainer} data-testid='nav-modeswitcher'>
+              <ModeSwitcher styles={styles.modeSwitcher} />
+            </div>
+          </nav>
+        </Popover>
+      </header>
+      <READMEModal 
+        title='README'
+        isOpen={isREADMEOpen}
+        onClick={()=>setIsREADMEOpen(false)}
+      />
+      <TermsOfUseModal 
+        title='Terms and Conditions'
+        isOpen={isTermsOfUseOpen}
+        onClick={()=>setIsTermsOfUseOpen(false)}
+      />
+      <PrivacyModal 
+        title='Privacy Policy'
+        isOpen={isPrivacyOpen}
+        onClick={()=>setIsPrivacyOpen(false)}
+      />
+      <CookiePolicyModal 
+        title='Cookie Policy'
+        isOpen={isCookieOpen}
+        onClick={()=>setIsCookieOpen(false)}
+      />
+    </>
   )
 
 }

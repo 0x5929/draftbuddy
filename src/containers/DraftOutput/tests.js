@@ -15,19 +15,7 @@ describe('testing DraftOutput Container', () => {
     render(<DraftOutput data={mockSortedData} setServRes={mockSetServResp} />)
   })
   
-  test('should render main card with first round draft info, starting with RB', () => {
-    expect(screen.getByText('Nick Chubb')).toBeInTheDocument()
-    expect(screen.getByText('CLE')).toBeInTheDocument()
-    expect(screen.getByText('ADP: 7.9')).toBeInTheDocument()
-
-    expect(screen.getByText('Saquon Barkley')).toBeInTheDocument()
-    expect(screen.getByText('NYG')).toBeInTheDocument()
-    expect(screen.getByText('ADP: 10.2')).toBeInTheDocument()
-
-    expect(screen.getByText('Austin Ekeler')).toBeInTheDocument()
-    expect(screen.getByText('LAC')).toBeInTheDocument()
-    expect(screen.getByText('ADP: 10.7')).toBeInTheDocument()
-
+  test('should render main card with first round draft info, minus player cards (tested in components)', () => {
     expect(screen.getByText('Round: 1')).toBeInTheDocument()
     expect(screen.getByText('Pick: 8')).toBeInTheDocument()
     expect(screen.getByText('Overall: 8')).toBeInTheDocument()

@@ -3,6 +3,7 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render, screen, cleanup, fireEvent, act } from '@testing-library/react'
 // import preview from 'jest-preview'
+import { mockAPIData } from '@Utils'
 import DraftInput from '.'
 
 
@@ -21,11 +22,15 @@ describe('testing DraftInput container', () => {
 
   beforeEach(() => {
 
-    mockSetServRes = jest.fn()
+    mockSetServRes  = jest.fn()
+    
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mockAPIData)
+    })
 
     render(
       <QueryClientProvider client={queryClient}>
-        <DraftInput setServRes={mockSetServRes()} />
+        <DraftInput setServRes={mockSetServRes} />
       </QueryClientProvider>
     )
   })
@@ -160,7 +165,7 @@ describe('testing DraftInput container', () => {
 
   afterEach(() => {
     
-    mockSetServRes = null
+    // mockSetServRes = null
     jest.restoreAllMocks()
     cleanup()
   })

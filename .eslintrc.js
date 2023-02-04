@@ -66,6 +66,7 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 0,
     'jsx-a11y/no-redundant-roles': 1,
     'no-plusplus': 0,
+    'no-promise-executor-return': 0,
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": false}]
   }
 }
