@@ -32,10 +32,7 @@ function useFetch() {
       throw new Error('We\'ve cancelled your query for the moment, please try again.')
     }
 
-    const url = process.env.NODE_ENV === 'production' ? 
-      `https://fantasyfootballcalculator.com/api/v1/adp/${format}?teams=${headCount}&year=${year}` 
-        :
-      `/api/v1/adp/${format}?teams=${headCount}&year=${year}`
+    const url = `/api/v1/adp/${format}?teams=${headCount}&year=${year}`
 
     // first promise resolve
     const resp = await fetch(url)
